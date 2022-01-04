@@ -63,17 +63,17 @@ end
 max_value_chatterjee_correlation(n::Real) = (n-2)/(n+1)
 
 
-minimum_value_chatterjee_correlation(x::AbstractVector, y::AbstractVector) = minimum_value_chatterjee_correlation(length(x))
+min_value_chatterjee_correlation(x::AbstractVector, y::AbstractVector) = min_value_chatterjee_correlation(length(x))
 
 
 """
-    minimum_value_chatterjee_correlation(n::Real)
+    min_value_chatterjee_correlation(n::Real)
 
 Minimum value of Chatterjee correlation is -1/2 + O(1/n).
 This value only occurs, when y's are sorted alternatingly.
 Therefore, large negative correlation means: non i.i.d. sample.
 """
-function minimum_value_chatterjee_correlation(n::Real)
+function min_value_chatterjee_correlation(n::Real)
     vals = sort(randn(n))
     alternating_vals = reduce(vcat, [[x, y] for (x, y) in zip(vals[1:n÷2], vals[(n÷2)+1:end])])
     chatterjee_correlation(1:length(alternating_vals), alternating_vals)
