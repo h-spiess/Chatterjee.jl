@@ -18,6 +18,13 @@ function smooth_random_walk(x=randn(1000); cycles=8, windowspan=50)
     (1:length(y), y)
 end
 
+"As described in the paper."
+function two_gaussians(;n=200)
+    gaussian_one = randn(2, n÷2)
+    gaussian_two = randn(2, n÷2) .+ [5, 5]
+    gaussians = [gaussian_one gaussian_two][:, randperm(n)]
+    gaussians[1, :], gaussians[2, :]
+end
 
 @testset "invariant to strictly increasing transformations" begin
     for (x, y) in [smooth_random_walk(), linear()]
